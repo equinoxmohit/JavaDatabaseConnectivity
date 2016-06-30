@@ -93,5 +93,24 @@ public  class CourseDaoImpl implements CourseDao {
         
     }
 
+    @Override
+    public int update(Course course) throws ClassNotFoundException, SQLException {
+        connect.open();
+
+        String sql = "UPDATE tbl_courses SET course_name=? WHERE course_id=?";
+  
+        PreparedStatement stmnt = connect.initStatements(sql);
+        
+       
+        stmnt.setString(1, course.getCourse_name());
+        stmnt.setInt(2, course.getCourse_id());
+        
+     
+        int result = connect.update();
+
+            connect.close();
+            return result;
+    }
+
   
 }
